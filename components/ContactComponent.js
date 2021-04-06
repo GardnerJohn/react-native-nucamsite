@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { Text, ScrollView } from 'react-native';
 import { Card } from 'react-native-elements';
 
 class Contact extends Component {
@@ -13,7 +13,7 @@ class Contact extends Component {
 				<Card title="Contact Information" style={{ wrapperStyle: 20 }}>
 					<Text style={{ marginBottom: 10 }}>
 						1 Nucamp Way {'\n'}
-						Seatle, WA 98001 {'\n'}
+						Seattle, WA 98001 {'\n'}
 						U.S.A.
 					</Text>
 					<Text>
