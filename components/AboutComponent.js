@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Card } from 'react-native-elements';
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView, Text } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
 import { PARTNERS } from '../shared/partners';
+import CampsiteInfo from './CampsiteInfoComponent';
 
 function Mission() {
 	return (
