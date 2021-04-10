@@ -45,7 +45,7 @@ class About extends Component {
 		return (
 			<ScrollView>
 				<Mission />
-				<Card title="Community Partners">
+				<Card title="Community Partners" style={{ wrapperStyle: 20 }}>
 					<FlatList data={this.state.partners} renderItem={renderPartner} keyExtractor={(item) => item.id.toString()} />
 				</Card>
 			</ScrollView>
