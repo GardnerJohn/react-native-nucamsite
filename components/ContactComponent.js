@@ -9,7 +9,7 @@ class Contact extends Component {
 
 	render() {
 		return (
-			<ScrollView>
+			<ScrollView style={{ backgroundColor: '#dad3f8' }}>
 				<Card title="Contact Information" style={{ wrapperStyle: 20 }}>
 					<Text style={{ marginBottom: 10 }}>
 						1 Nucamp Way {'\n'}

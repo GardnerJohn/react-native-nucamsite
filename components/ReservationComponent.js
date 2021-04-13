@@ -28,7 +28,7 @@ class Reservation extends Component {
 
 	render() {
 		return (
-			<ScrollView>
+			<ScrollView style={{ backgroundColor: '#dad3f8' }}>
 				<View style={styles.formRow}>
 					<Text style={styles.formLabel}>Number of campers</Text>
 					<Picker
@@ -92,7 +92,9 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		flex: 1,
 		flexDirection: 'row',
-		margin: 20
+		margin: 20,
+		borderBottomWidth: 2,
+		borderBottomColor: '#000'
 	},
 	formLabel: {
 		fontSize: 18,

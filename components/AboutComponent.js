@@ -64,7 +64,7 @@ class About extends Component {
 		}
 
 		return (
-			<ScrollView>
+			<ScrollView style={{ backgroundColor: '#dad3f8' }}>
 				<Mission />
 				<Card title="Community Partners" style={{ wrapperStyle: 20 }}>
 					<FlatList
