@@ -49,9 +49,10 @@ function RenderComments({ comments }) {
 				<Text style={{ fontSize: 14 }}>{item.text}</Text>
 				<Rating
 					readonly
+					fractions="0"
 					startingValue={item.rating}
 					imageSize={10}
-					style={{ alignItems: 'flex-start', paddingVertical: 10 }}
+					style={{ alignItems: 'flex-start', paddingVertical: '5%' }}
 				/>
 				<Text style={{ fontSize: 12 }}>{`-- ${item.author}, ${item.date}`}</Text>
 			</View>
@@ -125,6 +126,7 @@ class CampsiteInfo extends Component {
 					<View style={styles.modal}>
 						<Rating
 							showRating
+							ratingCount="5"
 							startingValue={this.state.rating}
 							imageSize={40}
 							onFinishRating={(rating) => this.setState({ rating: rating })}
