@@ -48,7 +48,7 @@ function RenderComments({ comments }) {
 				<Text style={{ fontSize: 14 }}>{item.text}</Text>
 				<Rating
 					readonly
-					startingValue={this.state.rating}
+					startingValue={item.rating}
 					imageSize={10}
 					style={{ alignItems: 'flex-start', paddingVertical: 10 }}
 				/>
@@ -133,15 +133,19 @@ class CampsiteInfo extends Component {
 							placeholder="Author"
 							leftIcon={{ type: 'font-awesome', name: 'user-o' }}
 							leftIconContainerStyle={{ paddingRight: 10 }}
-							onChangeText={(text) => this.setState(text)}
-							value
+							onChangeText={(author) => {
+								this.setState({ author: author });
+							}}
+							value={this.state.author}
 						/>
 						<Input
 							placeholder="Comment"
 							leftIcon={{ type: 'font-awesome', name: 'comment-o' }}
 							leftIconContainerStyle={{ paddingRight: 10 }}
-							onChangeText={(text) => this.setState(text)}
-							value
+							onChangeText={(text) => {
+								this.setState({ text: text });
+							}}
+							value={this.state.text}
 						/>
 						<View style={{ margin: 10 }}>
 							<Button
