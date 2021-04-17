@@ -48,9 +48,8 @@ function RenderComments({ comments }) {
 			<View style={{ margin: 10 }}>
 				<Text style={{ fontSize: 14 }}>{item.text}</Text>
 				<Rating
-					readonly
-					fractions="0"
 					startingValue={item.rating}
+					readonly
 					imageSize={10}
 					style={{ alignItems: 'flex-start', paddingVertical: '5%' }}
 				/>
@@ -70,10 +69,10 @@ class CampsiteInfo extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			showModal: false,
 			rating: 5,
 			author: '',
-			text: ''
+			text: '',
+			showModal: false
 		};
 	}
 
@@ -126,7 +125,6 @@ class CampsiteInfo extends Component {
 					<View style={styles.modal}>
 						<Rating
 							showRating
-							ratingCount="5"
 							startingValue={this.state.rating}
 							imageSize={40}
 							onFinishRating={(rating) => this.setState({ rating: rating })}
@@ -153,12 +151,14 @@ class CampsiteInfo extends Component {
 						<View style={{ margin: 10 }}>
 							<Button
 								onPress={() => {
-									this.toggleModal();
+									this.handleComment(campsiteId);
 									this.resetForm();
 								}}
+								color="#5637DD"
 								title="Submit"
-								color="#5637dd"
 							/>
+						</View>
+						<View style={{ margin: 10 }}>
 							<Button
 								onPress={() => {
 									this.toggleModal();
