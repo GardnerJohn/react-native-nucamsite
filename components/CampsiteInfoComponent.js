@@ -91,7 +91,7 @@ function RenderComments({ comments }) {
 			<View style={{ margin: 10 }}>
 				<Text style={{ fontSize: 14 }}>{item.text}</Text>
 				<Rating
-					startingValue={item.rating}
+					startingValue={Number.parseInt(item.rating)}
 					readonly
 					imageSize={10}
 					style={{ alignItems: 'flex-start', paddingVertical: '5%' }}
