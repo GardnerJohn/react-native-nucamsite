@@ -87,11 +87,13 @@ function RenderCampsite(props) {
 
 function RenderComments({ comments }) {
 	const renderCommentItem = ({ item }) => {
+		const rating = Number.parseFloat(item.rating);
 		return (
 			<View style={{ margin: 10 }}>
 				<Text style={{ fontSize: 14 }}>{item.text}</Text>
 				<Rating
-					startingValue={Number.parseInt(item.rating)}
+					type="star"
+					startingValue={rating}
 					readonly
 					imageSize={10}
 					style={{ alignItems: 'flex-start', paddingVertical: '5%' }}
