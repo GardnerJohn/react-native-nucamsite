@@ -6,6 +6,8 @@ import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { baseUrl } from '../shared/baseUrl';
+import * as ImageManipulator from 'expo-image-manipulator';
+import * as MediaLibrary from 'expo-media-library';
 
 class LoginTab extends Component {
 	constructor(props) {
@@ -28,10 +30,7 @@ class LoginTab extends Component {
 		if (this.state.remember) {
 			SecureStore.setItemAsync(
 				'userinfo',
-				JSON.stringify({
-					username: this.state.username,
-					password: this.state.password
-				})
+				JSON.stringify({ username: this.state.username, password: this.state.password })
 			).catch((error) => console.log('Could not save user info', error));
 		} else {
 			SecureStore.deleteItemAsync('userinfo').catch((error) => console.log('Could not delete user info', error));
@@ -79,7 +78,7 @@ class LoginTab extends Component {
 					<Button
 						onPress={() => this.handleLogin()}
 						title="Login"
-						icon={<Icon name="sign-in" type="font-awesome" color="#FFF" iconStyle={{ marginRight: 10 }} />}
+						icon={<Icon name="sign-in" type="font-awesome" color="#fff" iconStyle={{ marginRight: 10 }} />}
 						buttonStyle={{ backgroundColor: '#5637DD' }}
 					/>
 				</View>
@@ -127,8 +126,35 @@ class RegisterTab extends Component {
 				aspect: [ 1, 1 ]
 			});
 			if (!capturedImage.cancelled) {
+				console.log('getImageFromCamera');
 				console.log(capturedImage);
-				this.setState({ imageUrl: capturedImage.uri });
+				MediaLibrary.saveToLibraryAsync(capturedImage.uri);
+				this.processImage(capturedImage.uri);
+			}
+		}
+	};
+
+	processImage = async (imgUri) => {
+		const processedImage = await ImageManipulator.manipulateAsync(imgUri, [ { resize: { width: 400 } } ], {
+			compress: 0.7,
+			format: 'png'
+		});
+		console.log(processedImage);
+		this.setState({ imageUrl: processedImage.uri });
+	};
+
+	getImageFromGallery = async () => {
+		const cameraRollPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+
+		if (cameraRollPermission.status === 'granted') {
+			const capturedImage = await ImagePicker.launchImageLibraryAsync({
+				allowsEditing: true,
+				aspect: [ 1, 1 ]
+			});
+			if (!capturedImage.cancelled) {
+				console.log(capturedImage);
+				console.log('getImageFromGallery');
+				this.processImage(capturedImage.uri);
 			}
 		}
 	};
@@ -138,10 +164,7 @@ class RegisterTab extends Component {
 		if (this.state.remember) {
 			SecureStore.setItemAsync(
 				'userinfo',
-				JSON.stringify({
-					username: this.state.username,
-					password: this.state.password
-				})
+				JSON.stringify({ username: this.state.username, password: this.state.password })
 			).catch((error) => console.log('Could not save user info', error));
 		} else {
 			SecureStore.deleteItemAsync('userinfo').catch((error) => console.log('Could not delete user info', error));
@@ -159,6 +182,7 @@ class RegisterTab extends Component {
 							style={styles.image}
 						/>
 						<Button title="Camera" onPress={this.getImageFromCamera} />
+						<Button title="Gallery" onPress={this.getImageFromGallery} />
 					</View>
 					<Input
 						placeholder="Username"
@@ -228,9 +252,9 @@ const Login = createBottomTabNavigator(
 	},
 	{
 		tabBarOptions: {
-			activeBackgroundColor: '#5637dd',
-			inactiveBackgroundColor: '#cec8ff',
-			activeTintColor: 'white',
+			activeBackgroundColor: '#5637DD',
+			inactiveBackgroundColor: '#CEC8FF',
+			activeTintColor: '#fff',
 			inactiveTintColor: '#808080',
 			labelStyle: { fontSize: 16 }
 		}

@@ -279,6 +279,12 @@ class Main extends Component {
 		});
 	}
 
+	showNetInfo = async () => {
+		const connectionInfo = (await NetInfo.fetch()(Platform.OS === 'ios'))
+			? Alert.alert('Initial Network Connectivity Type:', connectInfo.type)
+			: ToastAndroid.show('Initial Network Connectivity type: ' + connectInfo.type, ToastAndroid.LONG);
+	};
+
 	componentWillUnmount() {
 		this.unsubscripeNetInfo();
 	}
